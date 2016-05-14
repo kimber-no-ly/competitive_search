@@ -1,7 +1,7 @@
 (function(){
 
-	var red = '#FF9999'
-	var blue = '#9999FF'
+	var red = '#ff6699'
+	var blue = '#0099cc'
 
 	var render = function(state, element, canMove, cb, thisPlayer){
 

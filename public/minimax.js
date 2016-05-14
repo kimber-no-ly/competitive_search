@@ -35,6 +35,12 @@
 		//an 'x' or an 'o', do this.
 		var playerMoving = state.nextMovePlayer;
 
+		//THIS IS WHAT HE WROTE AT END
+		// return max(allLegalMoves, function(legal){
+		// 	var successor = state.move(legal);
+		// 	return minimax(successor, state.nextMovePlayer);
+		// });
+
 		//You'll want to change this...		
 		//Currently moves randomly.
 		return allLegalMoves[Math.floor(Math.random()*allLegalMoves.length)];
@@ -79,8 +85,11 @@
 	pass it.
 	*/
 	var heuristic = function(state, maximizingPlayer){
-		//Need some code here.
-	}
+		var numLinesResult = state.numLines(2, 'x');
+
+		if(maximizingPlayer === 'x' ) return numLinesResult;
+		return -numLinesResult;
+	};
 
 
 
@@ -108,8 +117,15 @@
 	know, I believe.
 	*/
 	var minimax = function(state, depth, maximizingPlayer){
-		var possibleStates = state.nextStates();
+		var possibleStates = state.nextStates(); //array of legal moves/states
 		var currentPlayer = state.nextMovePlayer;
+
+		if(depth === 0 || possibleStates.length === 0) {
+			return heuristic(state, maximizingPlayer);
+		}
+
+		return minimax(state, depth-1, currentPlayer);
+
 	}
 
 
